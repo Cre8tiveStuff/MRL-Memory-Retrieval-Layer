@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mrl-memory-retrieval-layer"
+version = "0.1.0"
+description = "Cross-session memory:  extracts, stores, and retrieves facts an agent should remember between conversations"
+requires-python = ">=3.9"
+dependencies = [
+    "sentence-transformers",
+ ]
+
+[tool.setuptools]
+py-modules = ["mrl"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."] 
