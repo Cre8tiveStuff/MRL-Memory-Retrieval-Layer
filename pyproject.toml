@@ -9,10 +9,11 @@ description = "Cross-session memory:  extracts, stores, and retrieves facts an a
 requires-python = ">=3.9"
 dependencies = [
     "sentence-transformers",
+    "ollama",
  ]
 
 [tool.setuptools]
-py-modules = ["mrl"]
+py-modules = ["mrl", "extract"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."] 

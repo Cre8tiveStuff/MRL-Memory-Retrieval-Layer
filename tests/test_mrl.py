@@ -1,4 +1,5 @@
 from mrl import store_fact, search_facts
+from mrl import process_conversation
 
 def test_search_finds_relevant_fact():
     store_fact("test_session", "The favorite repository is procurement-rag.")
@@ -17,3 +18,9 @@ def test_category_filter_excludes_other_categories():
 
     assert len(results) == 1
     assert results[0][3] == "preference"
+
+def test_process_conversation_extracts_and_stores():
+    conversation = "User:  My favorite project is procurement-rag."
+    facts = process_conversation("test_extraction_session", conversation)
+    assert len(facts) >= 1
+    assert any("category" in f for f in facts)

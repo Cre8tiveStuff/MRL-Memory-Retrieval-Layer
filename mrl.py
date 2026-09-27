@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from sentence_transformers import SentenceTransformer
 import numpy as np
+from extract import extract_facts
 
 MEMORY_DB = "memory.db"
 _model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
@@ -65,3 +66,10 @@ def search_facts(query_text, top_k=3, category=None):
 
     scored.sort(reverse=True)
     return scored[:top_k]
+
+
+def process_conversation(session_id, conversation_text):
+    facts = extract_facts(conversation_text)
+    for item in facts:
+        store_fact(session_id, item["fact"], category=item["category"])
+    return facts
