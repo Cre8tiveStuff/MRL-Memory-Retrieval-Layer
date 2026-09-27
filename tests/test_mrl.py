@@ -8,3 +8,12 @@ def test_search_finds_relevant_fact():
 
     assert len(results) == 1
     assert "procurement-rag" in results[0][2]
+
+def test_category_filter_excludes_other_categories():
+    store_fact("s1", "Test preference fact.", category="preference")
+    store_fact("s1", "Test technical fact.", category="technical_fact")
+
+    results = search_facts("anything", top_k=10, category="preference")
+
+    assert len(results) == 1
+    assert results[0][3] == "preference"
